@@ -1,83 +1,77 @@
 /* We need to use this PrimeSeries Component in App.jsx using import and 
    export and these are of various types like 
-   Default export 
-   Named export
-   or both combined which we used here 
+   1. Default export 
+   2. Named export
+   3. or both combined which we used here 
 */
 
-// We create a component here and we will call this in App component 
 import React from "react"; 
 import PrimeData from "../api/PrimeData.json"; 
-import { Cards } from "./cards";
-
-
-
-
-
-const PrimeSeries = () => {
-
-   let userAge = 25;
-   const canWatch = () => {
-      if (userAge >= 18) return "Watch Now";
-      return "Turn off Kids Mode";
-            }
-
-// this is the return of PrimeSeries Component 
-   return (
-      <ul> 
-         {PrimeData.map((series) => {
-         <Cards keyProp={series.id}  seriesProps = {series}  />
-         })}
-      </ul>
-   );
-};
-export default PrimeSeries; 
-
+import { Cards } from "../components/Cards";
 
 
 
 /*
-Q. EXPLAIN ABOUT DEFAULT EXPORT ? (V. Imp.)
-   We can give any name with export default but recommended to use file name or 
-   component (similarly we could use a different name for import, again not needed), 
-   then we import it in App.jsx with import keyword and file name 
-   by specifying that is from (automatically we should get location inserted) which
-   location. 
-   Note that only one default 
-   We used default for PrimeSeries component 
+Q. EXPLAIN ABOUT DEFAULT EXPORT ? 
+   We can give any name with default export but recommended to use file or 
+   component name, then we import it in App.jsx with import keyword and file name 
+   by specifying its location (automatically we should get location inserted). 
+   
+   Note that there can only be one default for each file so it is used for exporting 
+   many values in one component. 
+   
+   We used default for PrimeSeries component here. 
 
 */ 
 
-/* Q. EXPLAIN ABOUT NAMED IMPORT AND EXPORT ? HOW IT DIFFERES FROM DEFAULT ? (V.Imp.)
-  
-   We used named export for Footer and Header
-   which are another component inside PrimeSeries
-   
+// This the PrimeSeries Component which will be imported in App.jsx 
+const PrimeSeries = () => {
+      let userAge = 25;
+      const canWatch = () => {
+            if (userAge >= 18) return "Watch Now";
+            return "Turn off Kids Mode";
+         }
 
+   // PrimeSeries Component returns this 
+   // Additionally we have imported a json file for fetching data  
+   return (
+      <ul> 
+         {PrimeData.map((series) => (<Cards keyProp={series.id} seriesProps = {series}/>
+         ))}
+      </ul>
+   );
+};
+export default PrimeSeries; // this is default export 
+
+
+/* Q. EXPLAIN ABOUT NAMED IMPORT AND EXPORT ? HOW IT DIFFERES FROM DEFAULT ?
+  
+   We used named export for Footer and Header here which are 
+   another components inside PrimeSeries component. (We can have both one default 
+   and many named in a sigle file)
+
+   It allows to export multiple components from a single file unlike default which
+   exports only one componet (within it we can return many values though). 
+
+   The names of the exports matters here a lot
 */
 
   export const Header = () => {
     return <p> This would be Header </p>
   }
 
-
   export const Footer = () => {
     return <p> copyright @AmazonFlip </p>
   }
 
 
-
-
-
-
   /*
-- We always put images in public folder and after that we dont need to specify 
-full path in src of img tag. 
+  Props (or Properties)
 
-Q. EXLAIN ABOUT DYNAMIC VALUES IN JS. (Imp.)
-   - We could add any variable in our component in JSX by enclosing in {} 
-     and it will be inserted into DOM
-
-   - These {} can return expressions too basically anything that results a value
-     even a function call
-*/
+  Q. WHAT IS PROP IN RECACT ? 
+  Props (short for properties) are used to pass data from one component to another 
+  in React. They are like function arguments that are passed into React components 
+  and help make components reusable.
+  
+  
+  */
