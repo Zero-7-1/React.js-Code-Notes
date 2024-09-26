@@ -7,7 +7,8 @@
 
 import React from "react"; 
 import PrimeData from "../api/PrimeData.json"; 
-import { Cards } from "../components/Cards";
+import { SeriesCard } from "../components/SeriesCard";
+
 
 
 
@@ -26,22 +27,49 @@ Q. EXPLAIN ABOUT DEFAULT EXPORT ?
 
 // This the PrimeSeries Component which will be imported in App.jsx 
 const PrimeSeries = () => {
-      let userAge = 25;
-      const canWatch = () => {
-            if (userAge >= 18) return "Watch Now";
-            return "Turn off Kids Mode";
-         }
+   let userAge = 25;
 
-   // PrimeSeries Component returns this 
-   // Additionally we have imported a json file for fetching data  
+   const canWatch = (rating) => {
+      // Assuming ratings like "18+" require age >= 18
+      const ratingAge = parseInt(rating);
+      if (userAge >= ratingAge) return "Watch Now";
+      return "Turn off Kids Mode";
+   };
+
+
+/*
+Normal loops of JS can't be used here in JSX insatead high order array methods
+like map() is used to loop. 
+
+Q. WHY GENERALLY A KEY IS NEEDED FOR LISTS IN REACT ? 
+Key commonly used in <li> is a prop uniquely identifying each element in a list. 
+
+When React renders a list of items, it needs to keep track of which items have 
+changed, been added, or removed. The prop helps React efficiently manage these updates.
+
+Without a key , React would have to re-render the entire list, but with a key, 
+React only updates the specific items that have changed.
+
+React will show a warning in the console if key prop is missed. 
+Warning: Each child in a list should have a unique "key" prop.
+*/
+
    return (
-      <ul> 
-         {PrimeData.map((series) => (<Cards keyProp={series.id} seriesProps = {series}/>
-         ))}
-      </ul>
+      <ul> {PrimeData.map((series) => {
+        return <SeriesCard key={series.id} series={series} canWatch={canWatch} />;
+      })} </ul>
    );
+/*
+Two props passed in SeriesCard component one is Key for unique id and other is 
+current element. 
+
+*/
+
+
+
 };
-export default PrimeSeries; // this is default export 
+
+export default PrimeSeries; // this is a default export 
 
 
 /* Q. EXPLAIN ABOUT NAMED IMPORT AND EXPORT ? HOW IT DIFFERES FROM DEFAULT ?
@@ -64,14 +92,15 @@ export default PrimeSeries; // this is default export
     return <p> copyright @AmazonFlip </p>
   }
 
-
   /*
   Props (or Properties)
 
   Q. WHAT IS PROP IN RECACT ? 
   Props (short for properties) are used to pass data from one component to another 
-  in React. They are like function arguments that are passed into React components 
-  and help make components reusable.
+  in React. They work like function arguments that is the value passed to function 
+  parameters. Prop is essentially a javascript object, props object which can be
+  used to pass any no. of data to components. 
   
-  
+  The components sending the props data is parent and the reciever is the child. And
+  child can not send data back to parents.  
   */
