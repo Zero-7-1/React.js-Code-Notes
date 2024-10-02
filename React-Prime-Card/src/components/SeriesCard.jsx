@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-/*
+/* 
 
 In SeriesCard, destructured series directly in the function parameters so that
 now, instead of using props.series.seriesName, etc. , we can directly use seriesName, 

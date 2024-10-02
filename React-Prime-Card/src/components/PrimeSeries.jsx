@@ -4,7 +4,7 @@
    2. Named export
    3. or both combined which we used here 
 */
-
+ 
 import React from "react"; 
 import PrimeData from "../api/PrimeData.json"; 
 import { SeriesCard } from "../components/SeriesCard";
