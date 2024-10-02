@@ -6,7 +6,7 @@ KEY TOPICS COVERED IN THIS MINI PROJECT:
 - > LOOPS IN JSX
 - > PROPS 
 
-
+   
 Q. EXPALIN WHAT IS JSX ? 
    - JSX stands for JavaScript XML (JavaScript Syntax Extension)
    - It basically the syntax used here in react that allows us to write 
